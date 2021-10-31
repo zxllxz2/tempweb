@@ -17,7 +17,7 @@ Numerical experiments
 Here is a simple example in 2 dimension. Let's form two disjoint datasets in dimension 2. Regaring them as two independent tasks, we will train our nerual network model on these two datasets sequentially. Both datasets are formed by polynomials with some noise. Below is the visualization for the data that we use, together with their original functions.
 
 ![example image](../assets/images/datasets1.png "dataset 1&2")
-<img src="../assets/images/datasets1.png"><img/>
+<img src="https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/datasets1.png?raw=true"><img/>
 
 We then define our Multi-Layer-Perceptron model. Here we are using PyTorch to conduct the experiment.
 
