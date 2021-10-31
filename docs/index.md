@@ -3,7 +3,7 @@ layout: about
 permalink: /
 profile:
   align: right
-  image: MINT_Lab.jpg
+  image: MINT_Lab.png
 published: true
 ---
 
