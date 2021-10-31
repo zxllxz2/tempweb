@@ -98,6 +98,6 @@ How to solve catastrophic forgtting
 
 Unfortunately, the catastrophic forgetting is still a problem in the continual learning area. The most basic way to deal with it would be that whenever we have a new task, we combine data from all tasks together and train on this overall dataset to obtain the model. However, the costs are expensive.
 
-Some studies also try to alleviate catastrophic forgetting, utilizing architectural, functional, structural approaches. These include the method we are going to survey, like SWE, SI, and so on. They alter the architecture of the network, add a regularization term to the objective for penalization, or add penalties on network parameters to make them stay close to the parameters for the old tasks. We will go through them in ways that people can visualize and understand more easily.
+Some studies also try to alleviate catastrophic forgetting, utilizing architectural, functional, structural approaches. These include the method we are going to survey, like EWC, SI, and so on. They alter the architecture of the network, add a regularization term to the objective for penalization, or add penalties on network parameters to make them stay close to the parameters for the old tasks. We will go through them in ways that people can visualize and understand more easily.
 
 Thanks for reading. If you like this article or are interested in the topic of catastrophic forgetting, you are more than welcome to explore our other projects. Thanks again for your support!
