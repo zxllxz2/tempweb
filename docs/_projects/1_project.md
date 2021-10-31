@@ -59,12 +59,11 @@ optim = torch.optim.Adam(model.parameters(), lr=lr)
 
 Great! Let's start training on our first task! While training, we plot the MSE loss on both datasets. We see clearly see that the loss for task 1 drops significantly. Since we do not train on the 2nd dataset, it is normal to have its loss grow.
 
-![loss_after_task1_1](../assets/images/loss_after_task1_1.png)
+![loss_after_task1_1](../assets/images/loss_after_task1_1.jpg)
 
 And we can visualize our regressor after training on the task 1 dataset.
 
 ![regressor_after_task1](../assets/images/regressor_after_task1.png)
-![regressor_aftk1](https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg)
 
 It looks nice, isn't it? Now we will train our model "continually" on the 2nd dataset. We plot the MSE loss on both datasets as well.
 
