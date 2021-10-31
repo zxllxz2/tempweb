@@ -16,7 +16,7 @@ Numerical experiments
 
 Here is a simple example in 2 dimension. Let's form two disjoint datasets in dimension 2. Regaring them as two independent tasks, we will train our nerual network model on these two datasets sequentially. Both datasets are formed by polynomials with some noise. Below is the visualization for the data that we use, together with their original functions.
 
-![example image](../assets/images/datasets1.png "dataset 1&2")
+<!-- ![example image](../assets/images/datasets1.png "dataset 1&2") -->
 <img src="https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/datasets1.png?raw=true"><img/>
 
 We then define our Multi-Layer-Perceptron model. Here we are using PyTorch to conduct the experiment.
@@ -60,23 +60,29 @@ optim = torch.optim.Adam(model.parameters(), lr=lr)
 
 Great! Let's start training on our first task! While training, we plot the MSE loss on both datasets. We see clearly see that the loss for task 1 drops significantly. Since we do not train on the 2nd dataset, it is normal to have its loss grow.
 
-![loss_after_task1_1](../assets/images/loss_after_task1_1.jpg)
+<!-- ![loss_after_task1_1](../assets/images/loss_after_task1_1.jpg) -->
+![loss_after_task1_1](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss_after_task1_1.jpg?raw=true "loss after training on task 1")
 
 And we can visualize our regressor after training on the task 1 dataset.
 
-![regressor_after_task1](../assets/images/regressor_after_task1.png)
+<!-- ![regressor_after_task1](../assets/images/regressor_after_task1.png) -->
+![regressor_after_task1](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/regressor_after_task1.png?raw=true "regressor after training on task 1")
 
 It looks nice, isn't it? Now we will train our model "continually" on the 2nd dataset. We plot the MSE loss on both datasets as well.
 
-![loss_after_task2_1](../assets/images/loss_after_task2_1.png)
+<!-- ![loss_after_task2_1](../assets/images/loss_after_task2_1.png) -->
+![loss_after_task2_1](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss_after_task2_1.png?raw=true "loss after training on task 2")
 
 The loss curve looks really weird. The loss for the 2nd dataset decreases, while the loss for the previously trained 1st dataset increases. Then, how about the final regressor we get?
 
-![regressor_after_task2](../assets/images/regressor_after_task2.png)
+<!-- ![regressor_after_task2](../assets/images/regressor_after_task2.png) -->
+![regressor_after_task2](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/regressor_after_task2.png?raw=true "regressor after training on task 2")
 
 The regressor becomes a mess. Though it predicts data in task 2 accurately, it almost forgets task 1 completely. We can watch an animation of our training process to see such forgetting clearer.
 
-![loss_after_task1_1](../assets/images/training1.gif)
+<!-- ![loss_after_task1_1](../assets/images/training1.gif) -->
+![loss_after_task1_1](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/training1.gif?raw=true "regressor training")
+
 
 Such a forgetting phenomenon appeared in Neural Network training is the so-called "catastrophic forgetting". While people learn a model for a large number of tasks sequentially where the data in the old tasks are not available any more during training new ones, catastrophic forgetting happens quite a few as model keeps forgetting knowledge obtained from the preceding tasks.
 
