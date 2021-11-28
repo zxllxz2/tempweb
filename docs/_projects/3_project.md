@@ -1,8 +1,9 @@
 
+
 ---
 layout: post
-title: "Online EWC"
-description: Introduction to Online EWC
+title: "Why you forget me?"
+description: Explanation on catastrophic forgetting
 ---
 
 Motivation of Online EWC
