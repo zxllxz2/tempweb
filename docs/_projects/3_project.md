@@ -1,12 +1,9 @@
 
 ---
 layout: post
-title: Online EWC
+title: "Online EWC"
 description: Introduction to Online EWC
 ---
-
-
-
 
 Motivation of Online EWC
 ============
