@@ -116,7 +116,7 @@ class OnlineEWC:
 To compare online EWC with offline EWC, it's a good time to conduct experiments on online EWC with the same sample data 
 as that of offline EWC. The sample data we use is as follows
 
-![online4_data](../assets/images/data_online4.png)
+![online4_data](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/data_online4.png?raw=true)
 
 To tackle this problem, we use a 4-hidden-layer MLP with perceptron number of 1, 100, 100, 100, 100, and 1.
 
@@ -124,23 +124,23 @@ Below is the trace of the experiments after each individual task being trained
 
 Task 1:
 
-![loss1_task4](../assets/images/loss1_online4.png)
-![task1_online4](../assets/images/task1_online4.png)
+![loss1_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss1_online4.png?raw=true)
+![task1_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task1_online4.png?raw=true)
 
 Task 2:
 
-![loss2_task4](../assets/images/loss2_online4.png)
-![task2_online4](../assets/images/task2_online4.png)
+![loss2_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss2_online4.png?raw=true)
+![task2_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task2_online4.png?raw=true)
 
 Task 3:
 
-![loss3_task4](../assets/images/loss3_online4.png)
-![task3_online4](../assets/images/task3_online4.png)
+![loss3_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss3_online4.png?raw=true)
+![task3_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task3_online4.png?raw=true)
 
 Task 4:
 
-![loss4_task4](../assets/images/loss4_online4.png)
-![task4_online4](../assets/images/task4_online4.png)
+![loss4_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss4_online4.png?raw=true)
+![task4_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task4_online4.png?raw=true)
 
 Not bad, right? Just like we did for the offline EWC, the time duration for each training is recorded.
 They are 12.9, 18.0, 17.0, and 9.2 seconds. It seems that online EWC achieves a balance between the
