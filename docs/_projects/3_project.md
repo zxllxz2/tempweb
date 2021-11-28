@@ -1,10 +1,9 @@
-
-
 ---
 layout: post
-title: "Why you forget me?"
-description: Explanation on catastrophic forgetting
+title: "Online EWC"
+description: Introduction to Online EWC
 ---
+<!-- Example modified from [here](http://www.unexpected-vortices.com/sw/rippledoc/quick-markdown-example.html){:target="_blank"}. -->
 
 Motivation of Online EWC
 ============
