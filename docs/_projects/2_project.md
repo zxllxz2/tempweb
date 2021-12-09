@@ -1,153 +1,113 @@
 ---
 layout: post
-title: A longer Project Title
-description: short project description
+title: "EWC"
+description: Introduction to EWC
 ---
 
 Example modified from [here](http://www.unexpected-vortices.com/sw/rippledoc/quick-markdown-example.html){:target="_blank"}.
 
-H1 Header
+Idea behind EWC
 ============
 
-Paragraphs are separated by a blank line.
-
-2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists
-look like:
-
-  * this one
-  * that one
-  * the other one
-
-Note that --- not considering the asterisk --- the actual text
-content starts at 4-columns in.
-
-> Block quotes are
-> written like so.
->
-> They can span multiple paragraphs,
-> if you like.
-
-Use 3 dashes for an em-dash. Use 2 dashes for ranges (ex., "it's all
-in chapters 12--14"). Three dots ... will be converted to an ellipsis.
-Unicode is supported. ☺
+EWC is one important regularization-based technique that is used to alleviate the phenomenon of catastrophic forgetting. It uses regularization terms
+to prevent the neural network from going too far from previous states. However, unlike pure ridge regularization method, EWC uses fisher
+information matrix to keep track the importance of weights for precious tasks. So, EWC
 
 
-H2 Header
-------------
 
-Here's a numbered list:
 
- 1. first item
- 2. second item
- 3. third item
 
-Note again how the actual text starts at 4 columns in (4 characters
-from the left side). Here's a code sample:
+How offline EWC works
+============
 
-    # Let me re-iterate ...
-    for i in 1 .. 10 { do-something(i) }
+Offline EWC is the naive version of EWC. It strictly follows the idea of EWC by storing all fisher information matrices from previous tasks, 
+and adding them one by one as the regularization term when learning a new task. Assume our model f has learnt T-1 tasks and
+wants to learn the Tth one
 
-As you probably guessed, indented 4 spaces. By the way, instead of
-indenting the block, you can use delimited blocks, if you like:
+<p align="center">
+    min<sub>f</sub> L<sub>T</sub> = &alpha; F<sub>old</sub> + (1 - &alpha;) S
+</p>
 
-~~~
-define foobar() {
-    print "Welcome to flavor country!";
-}
-~~~
 
-(which makes copying & pasting easier). You can optionally mark the
-delimited block for Pandoc to syntax highlight it:
+
+Implementation of offline EWC
+============
+
+The offline EWC is implemented below using pytorch
 
 ~~~python
-import time
-# Quick, count to ten!
-for i in range(10):
-    # (but not *too* quick)
-    time.sleep(0.5)
-    print(i)
+class OfflineEWC:
+    def __init__(self, model: nn.Module, loss=nn.MSELoss()):
+        self._model = model
+
+        self._params = []
+        self._fims = []
+        self._loss = loss
+        self._optim = None
+        # self._lambda = []
+
+    def train(self, inputs, labels, lam, lr=8e8, epochs=500):
+
+        self._optim = torch.optim.Adam(self._model.parameters(), lr=lr)
+        
+        loss_values_x1 = []
+
+        # First training period
+        for _ in range(epochs):
+
+            f = self._model(inputs.float())
+
+            regularizer = 0
+
+            for n, p in self._model.named_parameters():
+                for i in range(len(self._fims)):
+                    regularizer += torch.dot(self._fims[i][n].reshape(-1), ((p - self._params[i][n]) ** 2).reshape(-1))
+
+            loss = self._loss(f, labels.unsqueeze(1).float()) + lam * regularizer
+            self._optim.zero_grad()
+            loss.backward()
+            self._optim.step()
+
+            # calculate and store the loss per epoch for both datasets
+            loss_values_x1.append(loss.item())
+
+        self._params.append({})
+        temp_param = {n: p for n, p in self._model.named_parameters() if p.requires_grad}
+        for n, p in deepcopy(temp_param).items():
+            self._params[-1][n] = p
+
+        f = self._model(inputs.float())
+        loss = self._loss(f, labels.unsqueeze(1).float())
+        self._optim.zero_grad()
+        loss.backward()
+
+        temp_fisher = {}
+        for n, p in self._model.named_parameters():
+            temp_fisher[n] = p.grad.data
+
+        self._fims.append({})
+        for n, p in temp_fisher.items():
+            self._fims[-1][n] = p ** 2
+
+        return loss_values_x1
 ~~~
 
+Demo of offline EWC
+============
+
+Next, we will try to convince you that offline EWC works through an example of four individual tasks. The data on which we're trying to train 
+continually is the following, and we will be using a 4-hidden-layer MLP with perceptron number of 1, 100, 100, 100, 100, and 1.
+
+![offline4_data](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/data_online4.png?raw=true)
 
 
-### An h3 header ###
+What can be improved?
+============
 
-Now a nested list:
+The advantage of using offline EWC is obvious: it alleviates the problem of catastrophic forgetting and mimic the effect 
+of Hessian matrix to the greatest degree. However, its downside can also be annoying. Imagine a situation such that there are hundreds of thousands
+tasks waiting to be learnt. Offline EWC will perform badly since it tries to store fisher information matrix for each task being
+learnt, and there will be hundreds of thousands of them. So, in this case, not only the space consumption will be large, but also the 
+computation cost wil be huge.
 
- 1. First, get these ingredients:
-
-      * carrots
-      * celery
-      * lentils
-
- 2. Boil some water.
-
- 3. Dump everything in the pot and follow
-    this algorithm:
-
-        find wooden spoon
-        uncover pot
-        stir
-        cover pot
-        balance wooden spoon precariously on pot handle
-        wait 10 minutes
-        goto first step (or shut off burner when done)
-
-    Do not bump wooden spoon or it will fall.
-
-Notice again how text always lines up on 4-space indents (including
-that last line which continues item 3 above).
-
-Here's a link to [a website](http://foo.bar), to a [local
-doc](local-doc.html), and to a [section heading in the current
-doc](#an-h2-header). Here's a footnote [^1].
-
-[^1]: Some footnote text.
-
-Tables can look like this:
-
-| Header 1 | Header 2                   | Header 3 |
-|:--------:|:--------------------------:|:--------:|
-| data1a   | Data is longer than header | 1        |
-| d1b      | add a cell                 |          |
-| lorem    | ipsum                      | 3        |
-|          | empty outside cells        |          |
-| skip     |                            | 5        |
-| six      | Morbi purus                | 6        |
-
-
-A horizontal rule follows.
-
-***
-
-Here's a definition list:
-
-apples
-  : Good for making applesauce.
-
-oranges
-  : Citrus!
-
-tomatoes
-  : There's no "e" in tomatoe.
-
-Again, text is indented 4 spaces. (Put a blank line between each
-term and  its definition to spread things out more.)
-
-Here's a "line block" (note how whitespace is honored):
-
-| Line one
-|   Line too
-| Line tree
-
-and images can be specified like so:
-
-![example image](https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=500&h=500&fit=crop "An exemplary image")
-
-Inline math equation: $\omega = d\phi / dt$. Display
-math should get its own line like so:
-
-$$I = \int \rho R^{2} dV$$
-
-And note that you can backslash-escape any punctuation characters
-which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
+Considering these two problems, online EWC has been introduced on the basis of offline EWC.

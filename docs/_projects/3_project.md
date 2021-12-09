@@ -142,7 +142,7 @@ Task 4:
 ![loss4_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss4_online4.png?raw=true)
 ![task4_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task4_online4.png?raw=true)
 
-Not bad, right? Just like we did for the offline EWC, the time duration for each training is recorded.
+Not bad, right? Just like what we did for the offline EWC, the time duration for each training is recorded.
 They are 12.9, 18.0, 17.0, and 9.2 seconds. It seems that online EWC achieves a balance between the
 accuracy-cost tradeoff.
 
