@@ -100,7 +100,9 @@ Now, we have seen some toy examples of catastrophic forgetting. However, is it a
 
 Unfortunately, catastrophic forgetting is still an unsolved problem in the continual learning area. A simple solution, which is currently the most effective solution, is to ensure that data from all tasks can be simultaneously available during future training. In this case, for any future task, we combine its own data with data from previous tasks and optimize our model on this huge overall dataset. This approach, in fact, would yield an upper bound for the performance of any continual learning model. However, it usually requires a memory system to remember previous task data and replay them during training on a new task, which is impractical with a massive amount of tasks as the memory cost would be unaffordable.
 
-<img src="drawing.jpg" alt="drawing" width="200"/>
+<p align="center">
+<img src="https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/annoyed.jpg?raw=true" alt="drawing" width="240"><img/>
+</p>
 
 Luckily, some studies invented other methods to alleviate catastrophic forgetting, which can be broadly divided into three main categories - architectural, regularization-based, and memory-based. All those methods reduce forgetting to some extent with limitations. What we are going to discuss here are regularization-based methods, including the most basic L2-norm regularization and the Elastic Weight Consolidation (EWC). Basically, regularization-based methods apply constraints on the model, forcing model parameters to stay close to optimized values for the old tasks. We will go through both of them in later sections.
 
