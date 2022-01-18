@@ -4,7 +4,6 @@ title: "EWC"
 description: Introduction to EWC
 ---
 
-Example modified from [here](http://www.unexpected-vortices.com/sw/rippledoc/quick-markdown-example.html){:target="_blank"}.
 
 Idea behind EWC
 ============
@@ -20,7 +19,7 @@ information matrix to keep track the importance of weights for precious tasks. S
 How offline EWC works
 ============
 
-Offline EWC is the naive version of EWC. It strictly follows the idea of EWC by storing all fisher information matrices from previous tasks, 
+Offline EWC is the naive version of EWC. It strictly follows the idea of EWC by storing all fisher information matrices from previous tasks,
 and adding them one by one as the regularization term when learning a new task. Assume our model f has learnt T-1 tasks and
 wants to learn the Tth one
 
@@ -49,7 +48,7 @@ class OfflineEWC:
     def train(self, inputs, labels, lam, lr=8e8, epochs=500):
 
         self._optim = torch.optim.Adam(self._model.parameters(), lr=lr)
-        
+
         loss_values_x1 = []
 
         # First training period
@@ -95,7 +94,7 @@ class OfflineEWC:
 Demo of offline EWC
 ============
 
-Next, we will try to convince you that offline EWC works through an example of four individual tasks. The data on which we're trying to train 
+Next, we will try to convince you that offline EWC works through an example of four individual tasks. The data on which we're trying to train
 continually is the following, and we will be using a 4-hidden-layer MLP with perceptron number of 1, 100, 100, 100, 100, and 1.
 
 ![offline4_data](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/data_online4.png?raw=true)
@@ -104,10 +103,10 @@ continually is the following, and we will be using a 4-hidden-layer MLP with per
 What can be improved?
 ============
 
-The advantage of using offline EWC is obvious: it alleviates the problem of catastrophic forgetting and mimic the effect 
+The advantage of using offline EWC is obvious: it alleviates the problem of catastrophic forgetting and mimic the effect
 of Hessian matrix to the greatest degree. However, its downside can also be annoying. Imagine a situation such that there are hundreds of thousands
 tasks waiting to be learnt. Offline EWC will perform badly since it tries to store fisher information matrix for each task being
-learnt, and there will be hundreds of thousands of them. So, in this case, not only the space consumption will be large, but also the 
+learnt, and there will be hundreds of thousands of them. So, in this case, not only the space consumption will be large, but also the
 computation cost wil be huge.
 
 Considering these two problems, online EWC has been introduced on the basis of offline EWC.
