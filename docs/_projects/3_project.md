@@ -5,12 +5,43 @@ description: Introduction to EWC
 ---
 
 
+
+Motivation for Elastic Weight Consolidation (EWC)
+============
+Although L-2 norm regularization moderates catastrophic forgetting in some sense, it has one severe problem: no distinction in feature importance
+of previous tasks. As a result, L2-norm regularization may pose severe restrictions for all features, and, overall, the restriction can be so severe that the
+neural network can only remember previous tasks at the expense of not learning the new task. In order to address this problem,
+elastic weight consolidation (EWC) comes to the rescue. EWC is able to distinguish between important and unimportant features, and will
+penalize features that are critical to previous tasks severely while penalizing marginal features slightly. This allows simultaneous remembering and learning
+
+
+
 Idea behind EWC
 ============
 
-EWC is one important regularization-based technique that is used to alleviate the phenomenon of catastrophic forgetting. It uses regularization terms
-to prevent the neural network from going too far from previous states. However, unlike pure ridge regularization method, EWC uses fisher
-information matrix to keep track the importance of weights for precious tasks. So, EWC
+EWC tackles the problem from a probabilistic perspective. Assume that we are trying to continually learn from a collection of datasets, D. The
+conditional probability that we are trying to optimize would be *<span>log p(θ | D)</span>*. Let's first consider the two-task case.
+
+Suppose *<span>D</span>* is comprised of independent and disjoint datasets *<span>D<sub>A</sub></span>* and
+*<span>D<sub>B</sub></span>*, and it follows that *<span>D = D<sub>A</sub> ∪ D<sub>B</sub></span>*. For the 
+two-task case, the conditional probability *<span>log p(θ|D)</span>* is equivalent to *<span>log p(θ|D<sub>A</sub> + D<sub>B</sub>)</span>*.
+Using Beyes' rule, we can compute *<span>log p(θ | D)</span>* in the following way:
+
+<p align="center">
+    log p(D<sub>B</sub> | θ) + log p(θ | D<sub>A</sub>) - log p(D<sub>B</sub>)
+</p>
+
+*<span>log p(θ | D)</span>* is the posterior of continually learning two tasks, and terms in the above expression
+corresponds to the negative loss of the second task, prior of the second task (also posterior of the first task),
+and the normalization respectively. It can be easily inferred that all information about previous task should be contained
+in the term *<span>log p(θ | D<sub>A</sub>)</span>*. Nevertheless, the exact posterior is intractable and 
+we do not have access to data of previous tasks, so it must be approximated cleverly. One way to achieve this is through Laplace 
+Approximation, which will be discussed briefly here.
+
+Denote *<span> h(θ) = log p(θ | D<sub>A</sub>)</span>*, and let *<span>θ*</span>* be the point where *<span>h(θ)</span>*
+is optimum. Second degree Taylor expansion would give us an approximation of *<span>h(θ)</span>*
+
+$\frac{a}{b}$
 
 
 
