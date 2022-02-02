@@ -88,11 +88,13 @@ How offline EWC works
 Offline EWC is a natural extension of the two-task EWC. It strictly follows the idea of EWC by storing all fisher information matrices from previous tasks,
 and adding them one by one as the regularization term when learning a new task. Suppose we are trying to learn the *<span>K<sup>th</sup> task, the 
 loss function *<span>L</span>* using offline EWC would be
+
 <p align="center">
-    ![Offline_EWC] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/EWC_loss_eq7.jpg?raw=true)
+    ![Offline_EWC] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss_offline_EWC_eq8.jpg?raw=true)
 </p>
 
-
+Typically, the *<span>λ</span>* value used for each task is the same. However, it is of no cost to set *<span>λ</span>*
+individually for particular uses.
 
 
 Implementation of offline EWC
@@ -164,6 +166,28 @@ Next, we will try to convince you that offline EWC works through an example of f
 continually is the following, and we will be using a 4-hidden-layer MLP with perceptron number of 1, 100, 100, 100, 100, and 1.
 
 ![offline4_data](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/data_online4.png?raw=true)
+
+Below is the trace of the experiments after each individual task being trained
+
+Task 1:
+
+![loss1_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss1_offline4.png?raw=true)
+![task1_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task1_offline4.png?raw=true)
+
+Task 2:
+
+![loss2_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss2_offline4.png?raw=true)
+![task2_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task2_offline4.png?raw=true)
+
+Task 3:
+
+![loss3_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss3_offline4.png?raw=true)
+![task3_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task3_offline4.png?raw=true)
+
+Task 4:
+
+![loss4_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss4_offline4.png?raw=true)
+![task4_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task4_offline4.png?raw=true)
 
 
 What can be improved?
