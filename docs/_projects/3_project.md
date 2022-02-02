@@ -38,7 +38,7 @@ in the term *<span>log p(θ | D<sub>A</sub>)</span>*. Nevertheless, the exact po
 we do not have access to data of previous tasks, so it must be approximated cleverly. One way to achieve this is through Laplace 
 Approximation, which will be discussed briefly here.
 
-The crux of Laplace approximation is Taylor expansion. Denote *<span> h(θ) = log p(θ | D<sub>A</sub>)</span>*, and let *<span>θ*</span>* be the point where *<span>h(θ)</span>*
+The crux of Laplace approximation is second-degree Taylor expansion. Denote *<span> h(θ) = log p(θ | D<sub>A</sub>)</span>*, and let *<span>θ*</span>* be the point where *<span>h(θ)</span>*
 is optimum. Second degree Taylor expansion would give us an approximation of *<span>h(θ)</span>*:
 
 <p align="center">
@@ -49,7 +49,26 @@ The first term should be a constant and the second term is zero. Hence, the appr
 to the following using Hessian matrix:
 
 <p align="center">
-![Hessian_Approximation] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Taylor_expansion_eq3.jpg?raw=true)
+![Hessian_Approximation] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Hessian_approximation_eq4.jpg?raw=true)
+</p>
+
+Laplace approximation can be a solid approximation for the feature importance. However, the involvement
+of the second derivative makes it hard to implement in practice. A further approximation for the Hessian
+matrix is needed for the posterior, and the approximation we'll choose is the Fisher Information Matrix (FIM).
+FIM is defined to be the matrix multiplication of the first derivative, and, in our context, the FIM can be computed
+as follows:
+
+<p align="center">
+![FIM] ()
+</p>
+
+FIM has three properties: *<span>(i)</span>* It is equivalent to the second derivative of teh loss near the 
+minimum, *<span>(ii)</span>* it can be computed from first-order derivative alone, and *<span>(iii)</span>* it 
+is guaranteed to be positive semi-definite. Based on these, the Hessian matrix can then be approximated by *<span>-F</span>*.
+This provides a further approximation for the posterior:
+
+<p align="center">
+![FIM_Approximation] ()
 </p>
 
 
