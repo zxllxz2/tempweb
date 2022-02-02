@@ -41,9 +41,7 @@ Approximation, which will be discussed briefly here.
 The crux of Laplace approximation is Taylor expansion. Denote *<span> h(θ) = log p(θ | D<sub>A</sub>)</span>*, and let *<span>θ*</span>* be the point where *<span>h(θ)</span>*
 is optimum. Second degree Taylor expansion would give us an approximation of *<span>h(θ)</span>*:
 
-<p align="center">
-    h(θ*) + 
-</p>
+![Taylor_Expansion] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Taylor_expansion_eq3.jpg?raw=true)
 
 
 
