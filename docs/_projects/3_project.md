@@ -28,7 +28,7 @@ two-task case, the conditional probability *<span>log p(θ|D)</span>* is equival
 Using Beyes' rule, we can compute *<span>log p(θ | D)</span>* in the following way:
 
 <p align="center">
-![Bayes_Rule] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Bayes_rule_eq2.jpg?raw=true)
+![Bayes_Rule](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Bayes_rule_eq2.jpg?raw=true)
 </p>
 
 *<span>log p(θ | D)</span>* is the posterior of continually learning two tasks, and terms in the above expression
@@ -43,14 +43,14 @@ The crux of Laplace approximation is second-degree Taylor expansion. Denote *<sp
 is optimum. Second degree Taylor expansion would give us an approximation of *<span>h(θ)</span>*:
 
 <p align="center">
-![Taylor_Expansion] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Taylor_expansion_eq3.jpg?raw=true)
+![Taylor_Expansion](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Taylor_expansion_eq3.jpg?raw=true)
 </p>
 
 The first term should be a constant and the second term is zero. Hence, the approximation can be simplified
 to the following using Hessian matrix:
 
 <p align="center">
-![Hessian_Approximation] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Hessian_approximation_eq4.jpg?raw=true)
+![Hessian_Approximation](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Hessian_approximation_eq4.jpg?raw=true)
 </p>
 
 Laplace approximation can be a solid approximation for the feature importance. However, the involvement
@@ -60,7 +60,7 @@ FIM is defined to be the matrix multiplication of the first derivative, and, in 
 as follows:
 
 <p align="center">
-![FIM] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/FIM_eq5.jpg?raw=true)
+![FIM](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/FIM_eq5.jpg?raw=true)
 </p>
 
 FIM has three properties: *<span>(i)</span>* It is equivalent to the second derivative of teh loss near the 
@@ -69,14 +69,14 @@ is guaranteed to be positive semi-definite. Based on these, the Hessian matrix c
 This provides a further approximation for the posterior:
 
 <p align="center">
-![FIM_Approximation] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/FIM_approximation_eq6.jpg?raw=true)
+![FIM_Approximation](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/FIM_approximation_eq6.jpg?raw=true)
 </p>
 
 If we define a hyper-parameter *<span>λ</span>* that determines the importance of the old task compared with the new one, 
 MAP then gives the loss function *<span>L</span>* that we should minimize in EWC for two-task case:
 
 <p align="center">
-![EWC_Loss_Function] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/EWC_loss_eq7.jpg?raw=true)
+![EWC_Loss_Function](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/EWC_loss_eq7.jpg?raw=true)
 </p>
 
 $\frac{a}{b}$
@@ -90,7 +90,7 @@ and adding them one by one as the regularization term when learning a new task. 
 loss function *<span>L</span>* using offline EWC would be
 
 <p align="center">
-    ![Offline_EWC] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss_offline_EWC_eq8.jpg?raw=true)
+    ![Offline_EWC](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss_offline_EWC_eq8.jpg?raw=true)
 </p>
 
 Typically, the *<span>λ</span>* value used for each task is the same. However, it is of no cost to set *<span>λ</span>*
