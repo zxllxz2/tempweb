@@ -24,7 +24,7 @@ highlighter: rouge
 markdown: kramdown
 
 # Tracker
-analytics:
+# analytics:
 
 #optimization -> compress.html
 compress_html:
@@ -59,3 +59,5 @@ plugins:
   - jekyll-paginate
   - jekyll-email-protect
   - jekyll-target-blank
+
+future: true
