@@ -28,13 +28,14 @@ two-task case, the conditional probability *<span>log p(θ|D)</span>* is equival
 Using Beyes' rule, we can compute *<span>log p(θ | D)</span>* in the following way:
 
 <p align="center">
-    log p(D<sub>B</sub> | θ) + log p(θ | D<sub>A</sub>) - log p(D<sub>B</sub>)
+![Bayes_Rule] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Bayes_rule_eq2.jpg?raw=true)
 </p>
 
 *<span>log p(θ | D)</span>* is the posterior of continually learning two tasks, and terms in the above expression
 corresponds to the negative loss of the second task, prior of the second task (also posterior of the first task),
 and the normalization respectively. It can be easily inferred that all information about previous task should be contained
-in the term *<span>log p(θ | D<sub>A</sub>)</span>*. Nevertheless, the exact posterior is intractable and 
+in the term *<span>log p(θ | D<sub>A</sub>)</span>*. In order to perform maximum a posterior (MAP) method, we need to find 
+a way to represent the posterior of the previous task, *<span>log p(θ | D<sub>A</sub>)</span>*. Nevertheless, the exact posterior is intractable and 
 we do not have access to data of previous tasks, so it must be approximated cleverly. One way to achieve this is through Laplace 
 Approximation, which will be discussed briefly here.
 
@@ -78,24 +79,19 @@ MAP then gives the loss function *<span>L</span>* that we should minimize in EWC
 ![EWC_Loss_Function] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/EWC_loss_eq7.jpg?raw=true)
 </p>
 
-
-
 $\frac{a}{b}$
-
-
-
 
 
 How offline EWC works
 ============
 
-Offline EWC is the naive version of EWC. It strictly follows the idea of EWC by storing all fisher information matrices from previous tasks,
-and adding them one by one as the regularization term when learning a new task. Assume our model f has learnt T-1 tasks and
-wants to learn the Tth one
-
+Offline EWC is a natural extension of the two-task EWC. It strictly follows the idea of EWC by storing all fisher information matrices from previous tasks,
+and adding them one by one as the regularization term when learning a new task. Suppose we are trying to learn the *<span>K<sup>th</sup> task, the 
+loss function *<span>L</span>* using offline EWC would be
 <p align="center">
-    min<sub>f</sub> L<sub>T</sub> = &alpha; F<sub>old</sub> + (1 - &alpha;) S
+    ![Offline_EWC] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/EWC_loss_eq7.jpg?raw=true)
 </p>
+
 
 
 
