@@ -75,7 +75,7 @@ If we define a hyper-parameter *<span>λ</span>* that determines the importance 
 MAP then gives the loss function *<span>L</span>* that we should minimize in EWC for two-task case:
 
 <p align="center">
-![EWC_Loss_Function] ()
+![EWC_Loss_Function] (https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/EWC_loss_eq7.jpg?raw=true)
 </p>
 
 
