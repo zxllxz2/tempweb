@@ -8,13 +8,26 @@ description: Introduction to Online EWC
 Motivation of Online EWC
 ============
 
-In real applications, offline EWC can be costly in case of a large number of tasks and
-will become more and more expensive as the task number grows. This is because offline EWC
-tends to store the fisher information matrix of every task trained before and this can be
-huge with a large number of tasks. This is where online EWC comes to the rescue.
+In real applications, space and time complexity of Offline EWC can become unacceptable as task number grows.
+In light of this, Online EWC is introduced as a variant of the EWC technique. Online EWC compromises the 
+performance for a better complexity than the Offline version. So, it makes sense considering Online EWC as 
+a product of the trade-off between performance and complexity.
+
+
 
 How Online EWC works
 --------------
+
+
+Online EWC realizes multi-task continual learning by maintaining a single FIM (call it online
+FIM for differentiating purpose). This online FIM gets updated each time a new task is trained. Denote the online
+FIM before the update as *<span>F<sub>old</sub></span>* and the online FIM after the
+update as *<span>F<sub>new</sub></span>*. Let *<span>F<sub>c</sub></span>* be the FIM corresponding to the
+current task, and &alpha; be the importance coefficient controlling the weight of previous tasks. The update process of the
+online FIM can then be formulated as follows:
+
+![Offline_EWC](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss_offline_EWC_eq8.jpg?raw=true)
+
 
 Online EWC maintains a constant low cost as task number increases. This is achieved by always maintaining one fisher information matrix rather that many.
 So for the regularizer, instead of being a trail of fisher information matrix like &lambda;<sub>1</sub>F<sub>1</sub> +

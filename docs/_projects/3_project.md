@@ -20,26 +20,26 @@ Idea behind EWC
 ============
 
 EWC tackles the problem from a probabilistic perspective. Assume that we are trying to continually learn from a collection of datasets, D. The
-conditional probability that we are trying to optimize would be *<span>log p(θ | D)</span>*. Let's first consider the two-task case.
+conditional probability that we are trying to optimize would be *<span>log p(&theta; | D)</span>*. Let's first consider the two-task case.
 
 Suppose *<span>D</span>* is comprised of independent and disjoint datasets *<span>D<sub>A</sub></span>* and
 *<span>D<sub>B</sub></span>*, and it follows that *<span>D = D<sub>A</sub> ∪ D<sub>B</sub></span>*. For the 
-two-task case, the conditional probability *<span>log p(θ|D)</span>* is equivalent to *<span>log p(θ|D<sub>A</sub> + D<sub>B</sub>)</span>*.
-Using Beyes' rule, we can compute *<span>log p(θ | D)</span>* in the following way:
+two-task case, the conditional probability *<span>log p(&theta; | D)</span>* is equivalent to *<span>log p(&theta; | D<sub>A</sub> + D<sub>B</sub>)</span>*.
+Using Beyes' rule, we can compute *<span>log p(&theta; | D)</span>* in the following way:
 
 ![Bayes_Rule](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Bayes_rule_eq2.jpg?raw=true)
 
 
-*<span>log p(θ | D)</span>* is the posterior of continually learning two tasks, and terms in the above expression
+*<span>log p(&theta; | D)</span>* is the posterior of continually learning two tasks, and terms in the above expression
 corresponds to the negative loss of the second task, prior of the second task (also posterior of the first task),
 and the normalization respectively. It can be easily inferred that all information about previous task should be contained
-in the term *<span>log p(θ | D<sub>A</sub>)</span>*. In order to perform maximum a posterior (MAP) method, we need to find 
-a way to represent the posterior of the previous task, *<span>log p(θ | D<sub>A</sub>)</span>*. Nevertheless, the exact posterior is intractable and 
+in the term *<span>log p(&theta; | D<sub>A</sub>)</span>*. In order to perform maximum a posterior (MAP) method, we need to find 
+a way to represent the posterior of the previous task, *<span>log p(&theta; | D<sub>A</sub>)</span>*. Nevertheless, the exact posterior is intractable and 
 we do not have access to data of previous tasks, so it must be approximated cleverly. One way to achieve this is through Laplace 
 Approximation, which will be discussed briefly here.
 
-The crux of Laplace approximation is second-degree Taylor expansion. Denote *<span> h(θ) = log p(θ | D<sub>A</sub>)</span>*, and let *<span>θ*</span>* be the point where *<span>h(θ)</span>*
-is optimum. Second degree Taylor expansion would give us an approximation of *<span>h(θ)</span>*:
+The crux of Laplace approximation is second-degree Taylor expansion. Denote *<span> h(&theta;) = log p(&theta; | D<sub>A</sub>)</span>*, and let *<span>&theta;*</span>* be the point where *<span>h(&theta;)</span>*
+is optimum. Second degree Taylor expansion would give us an approximation of *<span>h(&theta;)</span>*:
 
 ![Taylor_Expansion](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Taylor_expansion_eq3.jpg?raw=true)
 
@@ -64,7 +64,7 @@ This provides a further approximation for the posterior:
 
 ![FIM_Approximation](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/FIM_approximation_eq6.jpg?raw=true)
 
-If we define a hyper-parameter *<span>λ</span>* that determines the importance of the old task compared with the new one, 
+If we define a hyper-parameter *<span>&lambda;</span>* that determines the importance of the old task compared with the new one, 
 MAP then gives the loss function *<span>L</span>* that we should minimize in EWC for two-task case:
 
 ![EWC_Loss_Function](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/EWC_loss_eq7.jpg?raw=true)
@@ -76,12 +76,12 @@ How offline EWC works
 ============
 
 Offline EWC is a natural extension of the two-task EWC. It strictly follows the idea of EWC by storing all fisher information matrices from previous tasks,
-and adding them one by one as the regularization term when learning a new task. Suppose we are trying to learn the *<span>K<sup>th</sup> task, the 
+and adding them one by one as the regularization term when learning a new task. Suppose we are trying to learn the *<span>K<sup>th</sup></span>* task, the 
 loss function *<span>L</span>* using offline EWC would be
 
 ![Offline_EWC](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss_offline_EWC_eq8.jpg?raw=true)
 
-Typically, the *<span>λ</span>* value used for each task is the same. However, it is of no cost to set *<span>λ</span>*
+Typically, the *<span>&lambda;</span>* value used for each task is the same. However, it is of no cost to set *<span>&lambda;</span>*
 individually for particular uses.
 
 
