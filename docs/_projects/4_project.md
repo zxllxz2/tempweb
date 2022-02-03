@@ -8,7 +8,7 @@ description: Introduction to Online EWC
 Motivation of Online EWC
 ============
 
-In real applications, space and time complexity of Offline EWC can become unacceptable as task number grows.
+Just like what we mentioned at the end of Offline EWC section, space and time complexity of Offline EWC can become unacceptable as task number grows.
 In light of this, Online EWC is introduced as a variant of the EWC technique. Online EWC compromises the 
 performance for a better complexity than the Offline version. So, it makes sense considering Online EWC as 
 a product of the trade-off between performance and complexity.
@@ -28,17 +28,16 @@ online FIM can then be formulated as follows:
 
 ![Online_FIM](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_FIM_eq9.jpg?raw=true)
 
-Given 
-
-Given the maintenance of a single FIM, suppose we are
-trying to learn theKth task, the loss function L using Online
+Given the maintenance of a single FIM, suppose we are trying to learn the *<span>K<sup>th</sup></span>* task, the loss function *<span>L</span>* using Online
 EWC would then be
+
+![Online_Update](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_Update_eq10.jpg?raw=true)
 
 
 Implementation of Online EWC
 --------------
 
-To implement the online EWC method, we first define the online EWC class using pytorch
+Below we show our implementation of Online EWC using pytorch
 
 ~~~python
 class OnlineEWC:
@@ -117,12 +116,13 @@ class OnlineEWC:
         self._time += time.time() - start_time
 ~~~
 
-To compare online EWC with offline EWC, it's a good time to conduct experiments on online EWC with the same sample data 
+To compare online EWC with offline EWC, it's a good idea to conduct experiments on online EWC with the same sample data 
 as that of offline EWC. The sample data we use is as follows
 
 ![online4_data](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/data_online4.png?raw=true)
 
-To tackle this problem, we use a 4-hidden-layer MLP with perceptron number of 1, 100, 100, 100, 100, and 1.
+Just like what we did for the Offline EWC, we use a 4-hidden-layer MLP with perceptron number of 1, 100, 100, 100, 100, 
+and 1 for the Online EWC.
 
 Below is the trace of the experiments after each individual task being trained
 
