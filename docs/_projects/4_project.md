@@ -26,22 +26,13 @@ update as *<span>F<sub>new</sub></span>*. Let *<span>F<sub>c</sub></span>* be th
 current task, and &alpha; be the importance coefficient controlling the weight of previous tasks. The update process of the
 online FIM can then be formulated as follows:
 
-![Offline_EWC](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss_offline_EWC_eq8.jpg?raw=true)
+![Online_FIM](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_FIM_eq9.jpg?raw=true)
 
+Given 
 
-Online EWC maintains a constant low cost as task number increases. This is achieved by always maintaining one fisher information matrix rather that many.
-So for the regularizer, instead of being a trail of fisher information matrix like &lambda;<sub>1</sub>F<sub>1</sub> +
-&lambda;<sub>2</sub>F<sub>2</sub> + ..., it can be as simple as a single term &lambda;F.
-
-The crux of online EWC is updating the fisher information matrix. Each time a new task is trained, 
-the fisher information matrix will be updated using a given weight.
-Let's assume the old fisher information matrix is F<sub>old</sub>, the significance level of the new task is S, 
-and the new fisher information matrix is F<sub>new</sub>. Also, let
-the weight of the new task be &alpha;. Mathematically, the update process can be expressed as
-
-<p align="center">
-    F<sub>new</sub> = &alpha; F<sub>old</sub> + (1 - &alpha;) S
-</p>
+Given the maintenance of a single FIM, suppose we are
+trying to learn theKth task, the loss function L using Online
+EWC would then be
 
 
 Implementation of Online EWC
