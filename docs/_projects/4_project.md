@@ -5,10 +5,10 @@ description: Introduction to Online EWC
 ---
 <!-- Example modified from [here](http://www.unexpected-vortices.com/sw/rippledoc/quick-markdown-example.html){:target="_blank"}. -->
 
-Motivation of Online EWC
+Motivation for Online EWC
 ============
 
-Just like what we mentioned at the end of Offline EWC section, space and time complexity of Offline EWC can become unacceptable as task number grows.
+Last section mentions that space and time complexity of Offline EWC can become unacceptable as task number grows.
 In light of this, Online EWC is introduced as a variant of the EWC technique. Online EWC compromises the 
 performance for a better complexity than the Offline version. So, it makes sense considering Online EWC as 
 a product of the trade-off between performance and complexity.
@@ -26,13 +26,16 @@ update as *<span>F<sub>new</sub></span>*. Let *<span>F<sub>c</sub></span>* be th
 current task, and &alpha; be the importance coefficient controlling the weight of previous tasks. The update process of the
 online FIM can then be formulated as follows:
 
-![Online_FIM](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_FIM_eq9.jpg?raw=true)
+<p align="center">
+  <img width="250" height="38" src="https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_FIM_eq9.jpg?raw=true">
+</p>
 
 Given the maintenance of a single FIM, suppose we are trying to learn the *<span>K<sup>th</sup></span>* task, the loss function *<span>L</span>* using Online
 EWC would then be
 
-![Online_Update](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_Update_eq10.jpg?raw=true)
-
+<p align="center">
+  <img width="250" height="47" src="https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_Update_eq10.jpg?raw=true">
+</p>
 
 Implementation of Online EWC
 --------------
@@ -146,7 +149,6 @@ Task 4:
 ![loss4_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss4_online4.png?raw=true)
 ![task4_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task4_online4.png?raw=true)
 
-Not bad, right? Just like what we did for the offline EWC, the time duration for each training is recorded.
-They are 12.9, 18.0, 17.0, and 9.2 seconds. It seems that online EWC achieves a balance between the
-accuracy-cost tradeoff.
+Not bad, right? Online EWC is not the end, and there are still possible improvements out there. In the next section, 
+we'll focus on possible improvements for EWC techniques.
 
