@@ -80,8 +80,6 @@ MAP then gives the loss function *<span>L</span>* that we should minimize in EWC
   <img width="230" height="50" src="https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/EWC_loss_eq7.jpg?raw=true">
 </p>
 
-$\frac{a}{b}$
-
 
 Offline EWC
 ============
