@@ -149,6 +149,5 @@ Task 4:
 ![loss4_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss4_online4.png?raw=true)
 ![task4_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task4_online4.png?raw=true)
 
-Not bad, right? Online EWC is not the end, and there are still possible improvements out there. In the next section, 
-we'll focus on possible improvements for EWC techniques.
+Not bad, right? But can we do better? Obviously, Online EWC is not the end, the next section will focus on possible improvements for EWC techniques.
 
