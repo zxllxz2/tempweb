@@ -5,36 +5,42 @@ description: Introduction to Online EWC
 ---
 <!-- Example modified from [here](http://www.unexpected-vortices.com/sw/rippledoc/quick-markdown-example.html){:target="_blank"}. -->
 
-Motivation of Online EWC
+Motivation for Online EWC
 ============
 
-In real applications, offline EWC can be costly in case of a large number of tasks and
-will become more and more expensive as the task number grows. This is because offline EWC
-tends to store the fisher information matrix of every task trained before and this can be
-huge with a large number of tasks. This is where online EWC comes to the rescue.
+Last section mentions that space and time complexity of Offline EWC can become unacceptable as task number grows.
+In light of this, Online EWC is introduced as a variant of the EWC technique. Online EWC compromises the 
+performance for a better complexity than the Offline version. So, it makes sense considering Online EWC as 
+a product of the trade-off between performance and complexity.
+
+
 
 How Online EWC works
 --------------
 
-Online EWC maintains a constant low cost as task number increases. This is achieved by always maintaining one fisher information matrix rather that many.
-So for the regularizer, instead of being a trail of fisher information matrix like &lambda;<sub>1</sub>F<sub>1</sub> +
-&lambda;<sub>2</sub>F<sub>2</sub> + ..., it can be as simple as a single term &lambda;F.
 
-The crux of online EWC is updating the fisher information matrix. Each time a new task is trained, 
-the fisher information matrix will be updated using a given weight.
-Let's assume the old fisher information matrix is F<sub>old</sub>, the significance level of the new task is S, 
-and the new fisher information matrix is F<sub>new</sub>. Also, let
-the weight of the new task be &alpha;. Mathematically, the update process can be expressed as
+Online EWC realizes multi-task continual learning by maintaining a single FIM (call it online
+FIM for differentiating purpose). This online FIM gets updated each time a new task is trained. Denote the online
+FIM before the update as *<span>F<sub>old</sub></span>* and the online FIM after the
+update as *<span>F<sub>new</sub></span>*. Let *<span>F<sub>c</sub></span>* be the FIM corresponding to the
+current task, and &alpha; be the importance coefficient controlling the weight of previous tasks. The update process of the
+online FIM can then be formulated as follows:
 
 <p align="center">
-    F<sub>new</sub> = &alpha; F<sub>old</sub> + (1 - &alpha;) S
+  <img width="250" height="38" src="https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_FIM_eq9.jpg?raw=true">
 </p>
 
+Given the maintenance of a single FIM, suppose we are trying to learn the *<span>K<sup>th</sup></span>* task, the loss function *<span>L</span>* using Online
+EWC would then be
+
+<p align="center">
+  <img width="250" height="47" src="https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/Online_Update_eq10.jpg?raw=true">
+</p>
 
 Implementation of Online EWC
 --------------
 
-To implement the online EWC method, we first define the online EWC class using pytorch
+Below we show our implementation of Online EWC using pytorch
 
 ~~~python
 class OnlineEWC:
@@ -113,12 +119,13 @@ class OnlineEWC:
         self._time += time.time() - start_time
 ~~~
 
-To compare online EWC with offline EWC, it's a good time to conduct experiments on online EWC with the same sample data 
+To compare online EWC with offline EWC, it's a good idea to conduct experiments on online EWC with the same sample data 
 as that of offline EWC. The sample data we use is as follows
 
 ![online4_data](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/data_online4.png?raw=true)
 
-To tackle this problem, we use a 4-hidden-layer MLP with perceptron number of 1, 100, 100, 100, 100, and 1.
+Just like what we did for the Offline EWC, we use a 4-hidden-layer MLP with perceptron number of 1, 100, 100, 100, 100, 
+and 1 for the Online EWC.
 
 Below is the trace of the experiments after each individual task being trained
 
@@ -142,7 +149,5 @@ Task 4:
 ![loss4_task4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/loss4_online4.png?raw=true)
 ![task4_online4](https://github.com/zxllxz2/tempweb/blob/main/docs/assets/images/task4_online4.png?raw=true)
 
-Not bad, right? Just like what we did for the offline EWC, the time duration for each training is recorded.
-They are 12.9, 18.0, 17.0, and 9.2 seconds. It seems that online EWC achieves a balance between the
-accuracy-cost tradeoff.
+Not bad, right? But can we do better? Obviously, Online EWC is not the end, the next section will focus on possible improvements for EWC techniques.
 
